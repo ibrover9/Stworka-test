@@ -1,0 +1,60 @@
+:root {
+  --circle-bg-color: #e0e0e0;
+  --circle-fg-color: #76c7c0;
+  --circle-size: 150px;
+  --circle-stroke-width: 2.8;
+  --font-family: "Inter", sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: #f7f7f7;
+}
+
+.progress-circle {
+  --completed-tasks: var(
+    --completed-tasks,
+    0
+  ); /* Значение по умолчанию, если не задано */
+  --total-tasks: var(
+    --total-tasks,
+    1
+  ); /* Значение по умолчанию, если не задано */
+  width: var(--circle-size);
+  height: var(--circle-size);
+}
+
+.progress-circle__svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.progress-circle__bg {
+  fill: none;
+  stroke: var(--circle-bg-color);
+  stroke-width: var(--circle-stroke-width);
+}
+
+.progress-circle__fg {
+  fill: none;
+  stroke: var(--circle-fg-color);
+  stroke-width: var(--circle-stroke-width);
+  stroke-dasharray: 100;
+  stroke-dashoffset: calc(
+    100 - (var(--completed-tasks) / var(--total-tasks)) * 100
+  );
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-circle__text {
+  fill: #000;
+  font-size: 0.5em;
+  text-anchor: middle;
+  alignment-baseline: middle;
+}
